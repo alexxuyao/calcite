@@ -25,6 +25,7 @@ import org.apache.calcite.rex.RexBuilder;
 /**
  * Abstract base class for implementations of {@link RelImplementor}
  * that generate java code.
+ * 实现{@link RelImplementor} 的生成 Java 代码的抽象基类。
  */
 public abstract class JavaRelImplementor implements RelImplementor {
   private final RexBuilder rexBuilder;

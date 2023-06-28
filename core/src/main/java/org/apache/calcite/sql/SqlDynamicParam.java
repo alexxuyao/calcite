@@ -30,6 +30,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * SQL statement. The textual order in which dynamic parameters appear within an
  * SQL statement is the only property which distinguishes them, so this 0-based
  * index is recorded as soon as the parameter is encountered.
+ *
+ * <code>SqlDynamicParam</code> 表示 SQL 语句中的动态参数标记。动态参数在 SQL 语句中出现的文本顺序是唯一区分它们的属性，因此一旦遇到参数，就会记录这个从0开始的索引。
  */
 public class SqlDynamicParam extends SqlNode {
   //~ Instance fields --------------------------------------------------------

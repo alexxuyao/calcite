@@ -25,6 +25,7 @@ import java.util.Objects;
 
 /**
  * Dynamic parameter reference in a row-expression.
+ * 在行表达式中的动态参数引用。
  */
 public class RexDynamicParam extends RexVariable {
   //~ Instance fields --------------------------------------------------------

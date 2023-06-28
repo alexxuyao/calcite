@@ -190,8 +190,11 @@ public class EnumerableInterpretable extends ConverterImpl
     }
   }
 
-  /** Converts a bindable over scalar values into an array bindable, with each
-   * row as an array of 1 element. */
+  /**
+   * Converts a bindable over scalar values into an array bindable, with each
+   * row as an array of 1 element.
+   * 将可绑定的标量值转换为数组可绑定对象，每行作为一个包含1个元素的数组。
+   */
   static ArrayBindable box(final Bindable bindable) {
     if (bindable instanceof ArrayBindable) {
       return (ArrayBindable) bindable;

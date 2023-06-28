@@ -24,8 +24,14 @@ import org.apache.calcite.sql.validate.SqlConformance;
  * {@link RelNode relational expressions} into a plan. Calling
  * conventions typically have their own protocol for walking over a
  * tree, and correspondingly have their own implementors
+ * <p>
+ * 这是一个用于将{@link RelNode 关系表达式}树转换为计划的回调的标记接口。
+ * 调用约定通常有自己的遍历树的协议，并相应地有自己的实现者。
  */
 public interface RelImplementor {
-  /** Returns the desired SQL conformance. */
+  /**
+   * Returns the desired SQL conformance.
+   * 返回所需的 SQL 标准。
+   */
   SqlConformance getConformance();
 }

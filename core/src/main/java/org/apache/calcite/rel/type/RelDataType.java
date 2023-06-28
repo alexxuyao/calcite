@@ -31,10 +31,13 @@ import java.util.List;
 /**
  * RelDataType represents the type of a scalar expression or entire row returned
  * from a relational expression.
+ * RelDataType 表示标量表达式或从关系表达式返回的整行的类型。
  *
  * <p>This is a somewhat "fat" interface which unions the attributes of many
  * different type classes into one. Inelegant, but since our type system was
  * defined before the advent of Java generics, it avoids a lot of typecasting.
+ *
+ * 这是一个有点“胖”的接口，它将许多不同类型类的属性合并为一个。 不优雅，但由于我们的类型系统是在 Java 泛型出现之前定义的，因此它避免了很多类型转换。
  */
 public interface RelDataType {
   int SCALE_NOT_SPECIFIED = Integer.MIN_VALUE;

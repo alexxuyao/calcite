@@ -76,6 +76,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * Subclass of {@link org.apache.calcite.plan.RelImplementor} for relational
  * operators of {@link EnumerableConvention} calling convention.
+ * 是 {@link org.apache.calcite.plan.RelImplementor} 的子类，用于关系运算符。
+ *
  */
 public class EnumerableRelImplementor extends JavaRelImplementor {
   public final Map<String, Object> map;
