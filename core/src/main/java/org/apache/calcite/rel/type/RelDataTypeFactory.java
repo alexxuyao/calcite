@@ -45,6 +45,11 @@ import java.util.Objects;
  * objects are canonical: two types are equal if and only if they are
  * represented by the same Java object. This reduces memory consumption and
  * comparison cost.
+ *
+ * RelDataTypeFactory是一个用于创建数据类型描述符的工厂。它定义了实例化和组合SQL、Java和集合类型的方法。
+ * 该工厂还提供了用于返回类型推断的方法，用于处理SQL 2003在实现定义或不可行的情况下的算术运算。
+ * 该接口是抽象工厂模式的一个示例。任何RelDataTypeFactory的实现都必须确保类型对象是规范化的：
+ * 两个类型相等当且仅当它们由同一个Java对象表示。这减少了内存消耗和比较成本。
  */
 public interface RelDataTypeFactory {
   //~ Methods ----------------------------------------------------------------

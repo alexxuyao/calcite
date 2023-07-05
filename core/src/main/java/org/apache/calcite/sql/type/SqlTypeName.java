@@ -50,6 +50,11 @@ import java.util.Set;
  * <li>SqlTypeName provides a place to hang extra information such as whether
  * the type carries precision and scale.
  * </ul>
+ *
+ * 用于构建SQL类型的类型名称枚举。此类存在的原因（而不仅仅使用标准的java.sql.Type序数）是：
+ * Types不包括所有的SQL2003数据类型；
+ * SqlTypeName提供了类型安全的枚举；
+ * SqlTypeName提供了一个地方来存储额外的信息，比如类型是否具有精度和刻度。
  */
 public enum SqlTypeName {
   BOOLEAN(PrecScale.NO_NO, false, Types.BOOLEAN, SqlTypeFamily.BOOLEAN),

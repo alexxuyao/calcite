@@ -24,9 +24,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * Table that can be scanned without creating an intermediate relational
  * expression.
+ * 可被扫描的表，无需创建中间关系表达式。
  */
 public interface ScannableTable extends Table {
-  /** Returns an enumerator over the rows in this Table. Each row is represented
-   * as an array of its column values. */
+  /**
+   * Returns an enumerator over the rows in this Table. Each row is represented
+   * as an array of its column values.
+   * 返回此表中行的枚举器。每一行被表示为包含其列值的数组。
+   */
   Enumerable<@Nullable Object[]> scan(DataContext root);
 }

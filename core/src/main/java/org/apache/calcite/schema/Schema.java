@@ -122,12 +122,13 @@ public interface Schema {
    * code.
    *
    * @param parentSchema Parent schema
-   * @param name Name of this schema
+   * @param name         Name of this schema
    * @return Expression by which this schema can be referenced in generated code
    */
   Expression getExpression(@Nullable SchemaPlus parentSchema, String name);
 
-  /** Returns whether the user is allowed to create new tables, functions
+  /**
+   * Returns whether the user is allowed to create new tables, functions
    * and sub-schemas in this schema, in addition to those returned automatically
    * by methods such as {@link #getTable(String)}.
    *
@@ -135,190 +136,255 @@ public interface Schema {
    * stores the defined objects in a wrapper object.
    *
    * @return Whether the user is allowed to create new tables, functions
-   *   and sub-schemas in this schema
+   * and sub-schemas in this schema
    */
   boolean isMutable();
 
-  /** Returns the snapshot of this schema as of the specified time. The
+  /**
+   * Returns the snapshot of this schema as of the specified time. The
    * contents of the schema snapshot should not change over time.
    *
    * @param version The current schema version
-   *
    * @return the schema snapshot.
    */
   Schema snapshot(SchemaVersion version);
 
-  /** Table type. */
+  /**
+   * Table type.
+   */
   enum TableType {
-    /** A regular table.
+    /**
+     * A regular table.
      *
-     * <p>Used by DB2, MySQL, PostgreSQL and others. */
+     * <p>Used by DB2, MySQL, PostgreSQL and others.
+     * <p>
+     * 一个普通的表
+     * 被DB2、MySQL、PostgreSQL等使用。
+     */
     TABLE,
 
-    /** A relation whose contents are calculated by evaluating a SQL
+    /**
+     * A relation whose contents are calculated by evaluating a SQL
      * expression.
      *
-     * <p>Used by DB2, PostgreSQL and others. */
+     * <p>Used by DB2, PostgreSQL and others.
+     * <p>
+     * 一个通过评估SQL表达式来计算其内容的关系。
+     * 被DB2、PostgreSQL等使用。
+     */
     VIEW,
 
-    /** Foreign table.
+    /**
+     * Foreign table.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     * 外部表。
+     * 被PostgreSQL使用。
+     */
     FOREIGN_TABLE,
 
-    /** Materialized view.
+    /**
+     * Materialized view.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     MATERIALIZED_VIEW,
 
-    /** Index table.
+    /**
+     * Index table.
      *
-     * <p>Used by Apache Phoenix, PostgreSQL. */
+     * <p>Used by Apache Phoenix, PostgreSQL.
+     */
     INDEX,
 
-    /** Join table.
+    /**
+     * Join table.
      *
-     * <p>Used by Apache Phoenix. */
+     * <p>Used by Apache Phoenix.
+     */
     JOIN,
 
-    /** Sequence table.
+    /**
+     * Sequence table.
      *
      * <p>Used by Apache Phoenix, Oracle, PostgreSQL and others.
-     * In Phoenix, must have a single BIGINT column called "$seq". */
+     * In Phoenix, must have a single BIGINT column called "$seq".
+     */
     SEQUENCE,
 
-    /** A structure, similar to a view, that is the basis for auto-generated
+    /**
+     * A structure, similar to a view, that is the basis for auto-generated
      * materializations. It is either a single table or a collection of tables
      * that are joined via many-to-one relationships from a central hub table.
      * It is not available for queries, but is just used as an intermediate
-     * structure during query planning. */
+     * structure during query planning.
+     */
     STAR,
 
-    /** Stream. */
+    /**
+     * Stream.
+     */
     STREAM,
 
-    /** Type.
+    /**
+     * Type.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     TYPE,
 
-    /** A table maintained by the system. Data dictionary tables, such as the
+    /**
+     * A table maintained by the system. Data dictionary tables, such as the
      * "TABLES" and "COLUMNS" table in the "metamodel" schema, examples of
      * system tables.
      *
      * <p>Specified by the JDBC standard and used by DB2, MySQL, Oracle,
-     * PostgreSQL and others. */
+     * PostgreSQL and others.
+     */
     SYSTEM_TABLE,
 
-    /** System view.
+    /**
+     * System view.
      *
-     * <p>Used by PostgreSQL, MySQL. */
+     * <p>Used by PostgreSQL, MySQL.
+     */
     SYSTEM_VIEW,
 
-    /** System index.
+    /**
+     * System index.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     SYSTEM_INDEX,
 
-    /** System TOAST index.
+    /**
+     * System TOAST index.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     SYSTEM_TOAST_INDEX,
 
-    /** System TOAST table.
+    /**
+     * System TOAST table.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     SYSTEM_TOAST_TABLE,
 
-    /** Temporary index.
+    /**
+     * Temporary index.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     TEMPORARY_INDEX,
 
-    /** Temporary sequence.
+    /**
+     * Temporary sequence.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     TEMPORARY_SEQUENCE,
 
-    /** Temporary table.
+    /**
+     * Temporary table.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     TEMPORARY_TABLE,
 
-    /** Temporary view.
+    /**
+     * Temporary view.
      *
-     * <p>Used by PostgreSQL. */
+     * <p>Used by PostgreSQL.
+     */
     TEMPORARY_VIEW,
 
-    /** A table that is only visible to one connection.
+    /**
+     * A table that is only visible to one connection.
      *
-     * <p>Specified by the JDBC standard and used by PostgreSQL, MySQL. */
+     * <p>Specified by the JDBC standard and used by PostgreSQL, MySQL.
+     */
     LOCAL_TEMPORARY,
 
-    /** A synonym.
+    /**
+     * A synonym.
      *
-     * <p>Used by DB2, Oracle. */
+     * <p>Used by DB2, Oracle.
+     */
     SYNONYM,
 
-    /** An alias.
+    /**
+     * An alias.
      *
-     * <p>Specified by the JDBC standard. */
+     * <p>Specified by the JDBC standard.
+     */
     ALIAS,
 
-    /** A global temporary table.
+    /**
+     * A global temporary table.
      *
-     * <p>Specified by the JDBC standard. */
+     * <p>Specified by the JDBC standard.
+     */
     GLOBAL_TEMPORARY,
 
-    /** An accel-only table.
+    /**
+     * An accel-only table.
      *
      * <p>Used by DB2.
      */
     ACCEL_ONLY_TABLE,
 
-    /** An auxiliary table.
+    /**
+     * An auxiliary table.
      *
      * <p>Used by DB2.
      */
     AUXILIARY_TABLE,
 
-    /** A global temporary table.
+    /**
+     * A global temporary table.
      *
      * <p>Used by DB2.
      */
     GLOBAL_TEMPORARY_TABLE,
 
-    /** A hierarchy table.
+    /**
+     * A hierarchy table.
      *
      * <p>Used by DB2.
      */
     HIERARCHY_TABLE,
 
-    /** An inoperative view.
+    /**
+     * An inoperative view.
      *
      * <p>Used by DB2.
      */
     INOPERATIVE_VIEW,
 
-    /** A materialized query table.
+    /**
+     * A materialized query table.
      *
      * <p>Used by DB2.
      */
     MATERIALIZED_QUERY_TABLE,
 
-    /** A nickname.
+    /**
+     * A nickname.
      *
      * <p>Used by DB2.
      */
     NICKNAME,
 
-    /** A typed table.
+    /**
+     * A typed table.
      *
      * <p>Used by DB2.
      */
     TYPED_TABLE,
 
-    /** A typed view.
+    /**
+     * A typed view.
      *
      * <p>Used by DB2.
      */
@@ -331,14 +397,18 @@ public interface Schema {
      */
     TEMPORAL_TABLE,
 
-    /** Table type not known to Calcite.
+    /**
+     * Table type not known to Calcite.
      *
      * <p>If you get one of these, please fix the problem by adding an enum
-     * value. */
+     * value.
+     */
     OTHER;
 
-    /** The name used in JDBC. For example "SYSTEM TABLE" rather than
-     * "SYSTEM_TABLE". */
+    /**
+     * The name used in JDBC. For example "SYSTEM TABLE" rather than
+     * "SYSTEM_TABLE".
+     */
     public final String jdbcName;
 
     TableType() {

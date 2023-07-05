@@ -32,6 +32,9 @@ import java.util.List;
  * <p>If you wish to write a table that can apply projects but not filters,
  * simply decline all filters.
  *
+ * 可以扫描的表，可以选择性地应用提供的过滤表达式，并投影给定的列列表，而无需创建中间关系表达式。
+ * 如果您希望编写一个可以应用投影但不应用过滤器的表，只需拒绝所有过滤器即可。
+ *
  * @see ScannableTable
  * @see FilterableTable
  */
@@ -48,6 +51,12 @@ public interface ProjectableFilterableTable extends Table {
    * operator.
    *
    * <p>The projects are zero-based.
+   *
+   * 返回此表中的行的可枚举集合。
+   * 每一行被表示为一个包含其列值的数组。
+   * 过滤器列表是可变的。如果表可以实现特定的过滤器，则应从列表中删除该过滤器。如果无法实现过滤器，则应将其保留在列表中。
+   * 剩余的任何过滤器将由使用 Calcite 运算符进行实现。
+   * 投影是从零开始计数的。
    *
    * @param root Execution context
    * @param filters Mutable list of filters. The method should keep in the

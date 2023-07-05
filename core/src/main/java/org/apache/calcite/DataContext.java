@@ -69,69 +69,101 @@ public interface DataContext {
    */
   @Nullable Object get(String name);
 
-  /** Variable that may be asked for in a call to {@link DataContext#get}. */
+  /**
+   * Variable that may be asked for in a call to {@link DataContext#get}.
+   */
   enum Variable {
     UTC_TIMESTAMP("utcTimestamp", Long.class),
 
-    /** The time at which the current statement started executing. In
-     * milliseconds after 1970-01-01 00:00:00, UTC. Required. */
+    /**
+     * The time at which the current statement started executing. In
+     * milliseconds after 1970-01-01 00:00:00, UTC. Required.
+     */
     CURRENT_TIMESTAMP("currentTimestamp", Long.class),
 
-    /** The time at which the current statement started executing. In
+    /**
+     * The time at which the current statement started executing. In
      * milliseconds after 1970-01-01 00:00:00, in the time zone of the current
-     * statement. Required. */
+     * statement. Required.
+     */
     LOCAL_TIMESTAMP("localTimestamp", Long.class),
 
-    /** The Spark engine. Available if Spark is on the class path. */
+    /**
+     * The Spark engine. Available if Spark is on the class path.
+     */
     SPARK_CONTEXT("sparkContext", Object.class),
 
-    /** A mutable flag that indicates whether user has requested that the
+    /**
+     * A mutable flag that indicates whether user has requested that the
      * current statement be canceled. Cancellation may not be immediate, but
      * implementations of relational operators should check the flag fairly
-     * frequently and cease execution (e.g. by returning end of data). */
+     * frequently and cease execution (e.g. by returning end of data).
+     * <p>
+     * 一个可变标志，指示用户是否请求取消当前语句。 取消可能不会立即发生，但关系运算符的实现应该相当频繁地检查标志并停止执行（例如，通过返回数据结尾）。
+     */
     CANCEL_FLAG("cancelFlag", AtomicBoolean.class),
 
-    /** Query timeout in milliseconds.
-     * When no timeout is set, the value is 0 or not present. */
+    /**
+     * Query timeout in milliseconds.
+     * When no timeout is set, the value is 0 or not present.
+     */
     TIMEOUT("timeout", Long.class),
 
-    /** Advisor that suggests completion hints for SQL statements. */
+    /**
+     * Advisor that suggests completion hints for SQL statements.
+     */
     SQL_ADVISOR("sqlAdvisor", SqlAdvisor.class),
 
-    /** Writer to the standard error (stderr). */
+    /**
+     * Writer to the standard error (stderr).
+     */
     STDERR("stderr", OutputStream.class),
 
-    /** Reader on the standard input (stdin). */
+    /**
+     * Reader on the standard input (stdin).
+     */
     STDIN("stdin", InputStream.class),
 
-    /** Writer to the standard output (stdout). */
+    /**
+     * Writer to the standard output (stdout).
+     */
     STDOUT("stdout", OutputStream.class),
 
-    /** Locale in which the current statement is executing.
+    /**
+     * Locale in which the current statement is executing.
      * Affects the behavior of functions such as {@code DAYNAME} and
      * {@code MONTHNAME}. Required; defaults to the root locale if the
-     * connection does not specify a locale. */
+     * connection does not specify a locale.
+     */
     LOCALE("locale", Locale.class),
 
-    /** Time zone in which the current statement is executing. Required;
+    /**
+     * Time zone in which the current statement is executing. Required;
      * defaults to the time zone of the JVM if the connection does not specify a
-     * time zone. */
+     * time zone.
+     */
     TIME_ZONE("timeZone", TimeZone.class),
 
-    /** Set of built-in and custom time frames for use in functions such as
+    /**
+     * Set of built-in and custom time frames for use in functions such as
      * {@code FLOOR} and {@code EXTRACT}. Required; defaults to
-     * {@link org.apache.calcite.rel.type.TimeFrames#CORE}. */
+     * {@link org.apache.calcite.rel.type.TimeFrames#CORE}.
+     */
     TIME_FRAME_SET("timeFrameSet", TimeFrameSet.class),
 
-    /** The query user.
+    /**
+     * The query user.
      *
-     * <p>Default value is "sa". */
+     * <p>Default value is "sa".
+     */
     USER("user", String.class),
 
-    /** The system user.
+    /**
+     * The system user.
      *
      * <p>Default value is "user.name" from
-     * {@link System#getProperty(String)}. */
+     * {@link System#getProperty(String)}.
+     */
     SYSTEM_USER("systemUser", String.class);
 
     public final String camelName;
@@ -144,7 +176,9 @@ public interface DataContext {
           CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, name()));
     }
 
-    /** Returns the value of this variable in a given data context. */
+    /**
+     * Returns the value of this variable in a given data context.
+     */
     public <T> T get(DataContext dataContext) {
       //noinspection unchecked
       return (T) clazz.cast(dataContext.get(camelName));
